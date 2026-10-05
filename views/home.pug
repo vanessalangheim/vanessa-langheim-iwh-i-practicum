@@ -1,14 +1,14 @@
 doctype html
 html
     head 
-        title= `${title}`
+        title= '${title}'
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
     body    
         h1 Pets
         hr
         h2
-            a(href="/update-cobj") Add New Pet
+            a(href="/new-pet") Add to this table
         hr
         table
             thead
@@ -17,6 +17,7 @@ html
                     th Last Name
                     th Email
                     th Last Changed
+                    th
             tbody
                 each contact in data
                     tr
@@ -24,3 +25,7 @@ html
                         td #{contact.properties.lastname}
                         td #{contact.properties.email}
                         td #{contact.properties.lastmodifieddate}
+                        td 
+                            button
+                                a(href='/update-pet?method=patch&firstname=' + contact.properties.firstname + '&lastname=' + contact.properties.lastname + '&email=' + contact.properties.email) Update
+
