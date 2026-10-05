@@ -1,0 +1,26 @@
+doctype html
+html
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Pets
+        hr
+        h2
+            a(href="/update-cobj") Add New Pet
+        hr
+        table
+            thead
+                tr
+                    th First Name
+                    th Last Name
+                    th Email
+                    th Last Changed
+            tbody
+                each contact in data
+                    tr
+                        td #{contact.properties.firstname}
+                        td #{contact.properties.lastname}
+                        td #{contact.properties.email}
+                        td #{contact.properties.lastmodifieddate}

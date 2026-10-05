@@ -1,0 +1,23 @@
+doctype html
+html
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 New Pet
+        hr
+        p
+            a(href="/") Back
+        hr
+        form(action="/update-cobj" method="POST")
+            label(for="firstname") First Name:
+            input(type="text" name="firstname" required)
+            br
+            label(for="lastname") Last Name:
+            input(type="text" name="lastname" required)
+            br
+            label(for="email") Email:
+            input(type="email" name="email" required)
+            br
+            button(type="submit") Submit
