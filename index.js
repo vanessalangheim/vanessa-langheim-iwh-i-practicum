@@ -51,7 +51,7 @@ app.get('/', async (req, res) => {
 
 // * Code for Route 2 goes here
 
-// show form
+// ADD PET FORM
 app.get('/new-pet', async (req, res) => {
 
     data = {};
@@ -62,6 +62,7 @@ app.get('/new-pet', async (req, res) => {
 
 // * Code for Route 3 goes here
 
+// add pet
 app.post('/new-pet', async (req, res) => {
 
     console.log("#####  NEW!  ##############");
@@ -93,7 +94,7 @@ app.post('/new-pet', async (req, res) => {
 
 });
 
-
+// UPDATE PET FORM
 app.get('/update-pet', async (req, res) => {
 
     data = req.query;
@@ -102,21 +103,21 @@ app.get('/update-pet', async (req, res) => {
     res.render('updates', { title: 'Update Custom Object/Contacts Form | Integrating With HubSpot I Practicum', data });      
 });
 
+// update pet
 app.post('/update-pet', async (req, res) => {
 
     console.log("#####  UPDATE!  ##############");
     console.log(req.body);
 
-    /*
-    const newPet = {
+    const petData = {
         properties: {
             "firstname": req.body.firstname,
-            "lastname": req.body.lastname,
-            "email": req.body.email
+            "lastname": req.body.lastname
         }
     }
 
-    const createPet = 'https://api.hubapi.com/crm/v3/objects/contacts/';
+    const email = req.body.email;
+    const updateCPet = 'https://api.hubapi.com/crm/v3/objects/contacts/' + email + '?idProperty=email';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -124,60 +125,15 @@ app.post('/update-pet', async (req, res) => {
 
     try {
 
-        await axios.post(createPet, newPet, { headers } );
+        await axios.patch(updateCPet, petData, { headers } );
         res.redirect('/');
     }
     catch(err) {
     
         console.error(err);
     }
-    */
+ 
 });
-
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
-});
-
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
-        }
-    }
-
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
-
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
-    }
-
-});
-*/
 
 // * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));
